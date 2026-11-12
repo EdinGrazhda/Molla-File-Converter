@@ -8,6 +8,13 @@ A small, apple-shaped Linux desktop converter for images, audio, and video.
 Choose files or drop them onto an output format. Molla converts them locally
 and keeps the originals.
 
+## Download
+
+[Download Molla v0.1.0 Preview for Linux x64](https://github.com/EdinGrazhda/Molla-File-Converter/releases/download/v0.1.0-preview/Molla-linux-x64-v0.1.0-preview.tar.gz)
+
+Extract the archive and run `./launch-molla.sh`. The package includes the .NET
+runtime. FFmpeg and FFprobe are still required for audio and video conversion.
+
 ![Molla brand artwork: four glass apples](docs/assets/social/molla-colors-wide.png)
 
 *Promotional artwork above. Actual application below.*
