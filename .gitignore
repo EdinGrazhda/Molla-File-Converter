@@ -1,0 +1,29 @@
+# Local tools, caches, and build products
+**/bin/
+**/obj/
+**/.dotnet/
+**/.dotnet-home/
+**/.dotnet-tmp/
+**/.nuget/
+**/.runtime/
+**/.build/
+**/.swiftpm/
+**/build/
+**/__pycache__/
+*.pyc
+.venv/
+**/node_modules/
+.DS_Store
+.agents/
+.codex/
+# Private working material, not the public app
+rea-analysis/
+.env
+.env.*
+!.env.example
+*.key
+*.p12
+*.pfx
+*.log
+**/Configuration/Signing.plist
+**/Configuration/CredentialBroker.json

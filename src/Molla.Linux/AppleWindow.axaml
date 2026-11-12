@@ -1,0 +1,193 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Molla.Linux.AppleWindow"
+        Title="Molla Apple" Icon="/Assets/molla-icon.png" Width="400" Height="456"
+        CanResize="False" WindowDecorations="None" Background="Transparent"
+        TransparencyLevelHint="AcrylicBlur,Blur,Transparent" TextOptions.TextRenderingMode="Antialias"
+        FontFamily="avares://Molla/Assets/Fonts#DejaVu Sans">
+  <Window.Resources>
+    <LinearGradientBrush x:Key="AppleGlass" StartPoint="0%,0%" EndPoint="80%,100%">
+      <GradientStop Color="#D9F4FAFF" Offset="0" />
+      <GradientStop Color="#B3DCE9F0" Offset="0.55" />
+      <GradientStop Color="#CCD8E8E8" Offset="1" />
+    </LinearGradientBrush>
+  </Window.Resources>
+  <Window.Styles>
+    <Style Selector="Button.chrome">
+      <Setter Property="Width" Value="50" />
+      <Setter Property="Height" Value="50" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="FontSize" Value="17" />
+      <Setter Property="ZIndex" Value="20" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <!-- The whole square is clickable, including outside the rounded surface. -->
+          <Border Background="Transparent">
+            <Border Margin="9" CornerRadius="16" Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+              <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="Button.chrome:pointerover">
+      <Setter Property="Background" Value="#FFFFFFFF" />
+    </Style>
+    <Style Selector="TextBlock">
+      <Setter Property="FontFamily" Value="avares://Molla/Assets/Fonts#DejaVu Sans" />
+    </Style>
+    <Style Selector="Button">
+      <Setter Property="FontFamily" Value="avares://Molla/Assets/Fonts#DejaVu Sans" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="CornerRadius" Value="18" />
+      <Setter Property="Background" Value="#D9F7FAFF" />
+      <Setter Property="Foreground" Value="#213543" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BorderBrush" Value="#EFFFFFFF" />
+    </Style>
+    <Style Selector="Button.format">
+      <Setter Property="Width" Value="94" />
+      <Setter Property="Height" Value="64" />
+      <Setter Property="FontSize" Value="17" />
+      <Setter Property="FontWeight" Value="Medium" />
+    </Style>
+    <Style Selector="Button.format:pointerover, Button.format.drag-over">
+      <Setter Property="Background" Value="#F2FFFFFF" />
+      <Setter Property="BorderBrush" Value="#7199AE" />
+    </Style>
+    <Style Selector="Button.category">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="Padding" Value="15,9" />
+    </Style>
+    <Style Selector="Button.category.active">
+      <Setter Property="Background" Value="#F2FFFFFF" />
+      <Setter Property="Foreground" Value="#213543" />
+    </Style>
+    <Style Selector="Button.choose">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+      <Setter Property="Background" Value="#E53C5968" />
+      <Setter Property="Foreground" Value="White" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="CornerRadius" Value="28" />
+    </Style>
+    <Style Selector="Button.choose:pointerover">
+      <Setter Property="Background" Value="#F24E7082" />
+      <Setter Property="Foreground" Value="White" />
+    </Style>
+  </Window.Styles>
+  <Viewbox Stretch="Uniform">
+  <Grid>
+    <Canvas x:Name="Expanded" Width="500" Height="570">
+      <!-- Transparent corners preserve the apple silhouette on the desktop. -->
+      <Path x:Name="AppleBody" Data="M250,117 C199,79 115,90 64,146 C3,214 35,356 92,454 C129,519 176,548 220,530 C241,521 259,521 280,530 C324,548 371,519 408,454 C465,356 497,214 436,146 C385,90 301,79 250,117 Z"
+            Fill="{DynamicResource AppleGlass}" Stroke="#E6FFFFFF" StrokeThickness="1.5" IsHitTestVisible="False" />
+      <Path Data="M249,110 C240,82 247,61 260,44" Stroke="#B390A8AD" StrokeThickness="7" StrokeLineCap="Round" />
+      <Path Data="M258,73 C264,28 315,17 344,30 C326,62 291,85 258,73 Z" Fill="{DynamicResource AppleGlass}" Stroke="#D9FFFFFF" StrokeThickness="1.5" />
+      <Path Data="M265,69 Q298,48 328,36" Stroke="#99FFFFFF" StrokeThickness="2" />
+      <Border x:Name="DragHandle" Canvas.Left="150" Canvas.Top="120" Width="180" Height="64"
+              Background="Transparent" PointerPressed="MoveApple" Cursor="SizeAll" ToolTip.Tip="Drag the title to move Molla">
+      <StackPanel Spacing="4" VerticalAlignment="Center">
+        <TextBlock FontWeight="Normal" FontFamily="avares://Molla/Assets/Fonts/DejaVuSans.ttf#DejaVu Sans" Text="molla" FontSize="28" Foreground="#213543" HorizontalAlignment="Center" />
+        <TextBlock FontWeight="Normal" FontFamily="avares://Molla/Assets/Fonts/DejaVuSans.ttf#DejaVu Sans" Text="Drop. Convert. Done." FontSize="13" Foreground="#3D5664" HorizontalAlignment="Center" />
+      </StackPanel>
+      </Border>
+      <Button x:Name="CollapseButton" Classes="chrome" Canvas.Left="330" Canvas.Top="138" Content="−" Click="CollapseApple" ToolTip.Tip="Collapse to a small apple" AutomationProperties.Name="Collapse Molla" />
+      <Button x:Name="ColorButton" Classes="chrome" Canvas.Left="85" Canvas.Top="138"
+              ToolTip.Tip="Colors and shortcut" AutomationProperties.Name="Colors and shortcut">
+        <Path Data="M10,1 C6,6 3,9 3,12 A7,7 0 0 0 17,12 C17,9 14,6 10,1 Z"
+              Fill="#6A8D93" Stroke="#314F5A" StrokeThickness="1" Width="18" Height="20" Stretch="Uniform" />
+        <Button.Flyout>
+          <Flyout>
+            <Border Background="#F3F6F7" CornerRadius="12" Padding="12">
+            <TabControl Width="330" FontFamily="avares://Molla/Assets/Fonts#DejaVu Sans">
+              <TabItem Header="Colors">
+              <StackPanel Spacing="12" Margin="0,12,0,4">
+              <TextBlock Text="Apple color" FontFamily="avares://Molla/Assets/Fonts#DejaVu Sans" FontSize="13" />
+              <StackPanel Orientation="Horizontal" Spacing="6">
+                <Button x:Name="RedChoice" Content="Red" Tag="red" Background="#F3C8CA" Click="ChangeAppleColor" />
+                <Button x:Name="GreenChoice" Content="Green" Tag="green" Background="#CDE6D2" Click="ChangeAppleColor" />
+                <Button x:Name="YellowChoice" Content="Yellow" Tag="yellow" Background="#F5E5B8" Click="ChangeAppleColor" />
+                <Button x:Name="GrayChoice" Content="Gray" Tag="gray" Background="#DDDDDD" Click="ChangeAppleColor" />
+              </StackPanel>
+              </StackPanel>
+              </TabItem>
+              <TabItem x:Name="ShortcutTab" Header="Shortcut">
+                <StackPanel Spacing="10" Margin="0,12,0,4">
+                  <TextBlock Text="Open Molla from anywhere" FontFamily="avares://Molla/Assets/Fonts#DejaVu Sans" FontSize="14" />
+                  <TextBlock x:Name="CurrentShortcut" FontFamily="avares://Molla/Assets/Fonts#DejaVu Sans" Text="Loading shortcut…" FontSize="12" TextWrapping="Wrap" />
+                  <StackPanel Orientation="Horizontal" Spacing="10">
+                    <CheckBox x:Name="ShortcutCtrl" Content="Ctrl" />
+                    <CheckBox x:Name="ShortcutAlt" Content="Alt" />
+                    <CheckBox x:Name="ShortcutShift" Content="Shift" />
+                    <CheckBox x:Name="ShortcutSuper" Content="Super" />
+                  </StackPanel>
+                  <ComboBox x:Name="ShortcutKey" HorizontalAlignment="Stretch" AutomationProperties.Name="Shortcut key" />
+                  <Button x:Name="SaveShortcutButton" Content="Save shortcut" Click="SaveOpeningShortcut" HorizontalAlignment="Left" />
+                  <TextBlock x:Name="ShortcutFeedback" FontFamily="avares://Molla/Assets/Fonts#DejaVu Sans" FontSize="12" TextWrapping="Wrap" MaxWidth="310" />
+                  <TextBlock FontFamily="avares://Molla/Assets/Fonts#DejaVu Sans" Text="Alt + F4 still closes the selected window." FontSize="11" TextWrapping="Wrap" />
+                </StackPanel>
+              </TabItem>
+            </TabControl>
+            </Border>
+          </Flyout>
+        </Button.Flyout>
+      </Button>
+      <Button x:Name="CloseButton" Classes="chrome" Canvas.Left="380" Canvas.Top="138" Content="×" Click="CloseApple" ToolTip.Tip="Close Molla" AutomationProperties.Name="Close Molla" />
+      <Border Canvas.Left="112" Canvas.Top="191" Width="276" Background="#55FFFFFF" BorderBrush="#88FFFFFF" BorderThickness="1" CornerRadius="23" Padding="3">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="2">
+          <Button x:Name="ImagesTab" Classes="category" Content="Images" Tag="images" Click="ChangeCategory" />
+          <Button x:Name="AudioTab" Classes="category" Content="Audio" Tag="audio" Click="ChangeCategory" />
+          <Button x:Name="VideoTab" Classes="category" Content="Video" Tag="video" Click="ChangeCategory" />
+        </StackPanel>
+      </Border>
+      <Button x:Name="Slot0" Classes="format" Canvas.Left="76" Canvas.Top="249" />
+      <Button x:Name="Slot1" Classes="format" Canvas.Left="330" Canvas.Top="249" />
+      <Button x:Name="Slot2" Classes="format" Canvas.Left="57" Canvas.Top="325" />
+      <Button x:Name="Slot3" Classes="format" Canvas.Left="349" Canvas.Top="325" />
+      <Button x:Name="Slot4" Classes="format" Canvas.Left="103" Canvas.Top="401" />
+      <Button x:Name="Slot5" Classes="format" Canvas.Left="303" Canvas.Top="401" />
+      <TextBlock FontWeight="Normal" FontFamily="avares://Molla/Assets/Fonts/DejaVuSans.ttf#DejaVu Sans" x:Name="CategoryLabel" IsVisible="False" Text="IMAGES" />
+      <Border x:Name="DropCenter" Canvas.Left="169" Canvas.Top="294" Width="162" Height="104" CornerRadius="28" Background="#33486070" DragDrop.AllowDrop="True" BoxShadow="0 5 12 0 #2231563D">
+        <Button x:Name="ChooseButton" Classes="choose" Click="ChooseFiles" Padding="8">
+          <StackPanel Spacing="7">
+            <TextBlock FontWeight="Normal" FontFamily="avares://Molla/Assets/Fonts/DejaVuSans.ttf#DejaVu Sans" Text="+ Add files" FontSize="18" HorizontalAlignment="Center" />
+            <TextBlock FontWeight="Normal" FontFamily="avares://Molla/Assets/Fonts/DejaVuSans.ttf#DejaVu Sans" x:Name="SelectionLabel" Text="or drop here" FontSize="13" HorizontalAlignment="Center" MaxWidth="146" TextTrimming="CharacterEllipsis" />
+          </StackPanel>
+        </Button>
+      </Border>
+      <TextBlock FontWeight="Normal" FontFamily="avares://Molla/Assets/Fonts/DejaVuSans.ttf#DejaVu Sans" x:Name="Status" Canvas.Left="108" Canvas.Top="469" Width="284" Height="38" Text="Choose files, then a format." TextWrapping="Wrap" TextAlignment="Center" FontSize="13" Foreground="#213543" ToolTip.Tip="{Binding Text, RelativeSource={RelativeSource Self}}" />
+      <Grid Canvas.Left="105" Canvas.Top="502" Width="290">
+      <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="6">
+        <Button Content="Open exports" Click="OpenOutput" FontSize="13" Padding="12,5" Background="Transparent" BorderThickness="0" />
+        <Button x:Name="CancelButton" Content="Cancel" Click="CancelConversion" FontSize="13" Padding="10,5" IsVisible="False" />
+      </StackPanel>
+      </Grid>
+    </Canvas>
+    <Grid x:Name="Collapsed" IsVisible="False" Width="100" Height="125" Cursor="SizeAll" DragDrop.AllowDrop="True"
+          ToolTip.Tip="Click to open · drag anywhere to move · drop files to convert">
+      <Path x:Name="MiniBody" Data="M50,34 C35,22 13,29 10,48 C5,73 23,110 39,105 C48,102 53,102 61,105 C78,111 96,72 91,48 C88,29 65,22 50,34 Z"
+            Fill="{DynamicResource AppleGlass}" Stroke="#E6FFFFFF" StrokeThickness="1" />
+      <Path Data="M51,30 C53,11 72,7 79,11 C72,29 62,31 51,30 Z" Fill="{DynamicResource AppleGlass}" Stroke="#D9FFFFFF" StrokeThickness="1" />
+      <Button x:Name="MiniOpen" Content="Molla" Click="ExpandApple" Background="Transparent" BorderThickness="0"
+              Width="90" Height="92" Margin="0,9,0,0" Padding="0" Cursor="SizeAll" FontSize="14"
+              Clip="M45,12 C30,0 8,7 5,26 C0,51 18,88 34,83 C43,80 48,80 56,83 C73,89 91,50 86,26 C83,7 60,0 45,12 Z"
+              AutomationProperties.Name="Open Molla; drag to move">
+        <Button.Template>
+          <ControlTemplate>
+            <Border Background="Transparent">
+              <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+    </Grid>
+  </Grid>
+  </Viewbox>
+</Window>
