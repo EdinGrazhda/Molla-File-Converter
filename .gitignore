@@ -16,3 +16,8 @@ Configuration/CredentialBroker.json
 *.mobileprovision
 **/bin/
 **/obj/
+/.dotnet/
+/.dotnet-home/
+/.dotnet-tmp/
+/.nuget/
+/.runtime/

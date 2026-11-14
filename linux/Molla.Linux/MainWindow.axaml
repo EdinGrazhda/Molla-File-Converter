@@ -1,0 +1,97 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Molla.Linux.MainWindow"
+        Title="Molla" Icon="/Assets/molla-icon.png"
+        Width="920" Height="720"
+        MinWidth="760" MinHeight="600"
+        Background="#F8F3E8">
+  <Window.Styles>
+    <Style Selector="Button.nav">
+      <Setter Property="Background" Value="#F0EADB" />
+      <Setter Property="Foreground" Value="#31563D" />
+      <Setter Property="CornerRadius" Value="12" />
+      <Setter Property="Padding" Value="14,9" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Button.primary">
+      <Setter Property="Background" Value="#31563D" />
+      <Setter Property="Foreground" Value="White" />
+      <Setter Property="CornerRadius" Value="12" />
+      <Setter Property="Padding" Value="16,11" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="#FFFDFA" />
+      <Setter Property="BorderBrush" Value="#E9E2D4" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="22" />
+      <Setter Property="Padding" Value="22" />
+    </Style>
+  </Window.Styles>
+
+  <Grid RowDefinitions="Auto,*" Margin="28">
+    <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,24">
+      <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+        <Border Width="38" Height="38" CornerRadius="13" Background="#DFF0D2">
+          <TextBlock Text="🍎" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+        <TextBlock Text="Molla" FontSize="23" FontWeight="Bold" Foreground="#31563D" VerticalAlignment="Center" />
+        <TextBlock Text="Your files, a little easier." FontSize="13" Foreground="#778174" VerticalAlignment="Center" Margin="5,4,0,0" />
+      </StackPanel>
+      <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+        <Button Classes="nav" Content="Home" />
+        <Button Classes="nav" Content="Library" Click="ShowLibrary" />
+        <Button Classes="nav" Content="Desktop apple" Click="ShowApple" />
+      </StackPanel>
+    </Grid>
+
+    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+      <StackPanel Spacing="17">
+        <StackPanel Spacing="4" Margin="2,0,0,2">
+          <TextBlock Text="Your files, in good hands." FontSize="30" FontWeight="Bold" Foreground="#25352A" />
+          <TextBlock Text="Convert, fine-tune, and send them on their way." FontSize="14" Foreground="#778174" />
+        </StackPanel>
+
+        <Border Classes="card" Padding="24">
+          <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto,Auto">
+            <StackPanel Spacing="10">
+              <Border Background="#DFF0D2" CornerRadius="10" Padding="10,5" HorizontalAlignment="Left">
+                <TextBlock Text="START HERE" FontSize="10" FontWeight="Bold" Foreground="#31563D" LetterSpacing="1" />
+              </Border>
+              <TextBlock x:Name="SelectionTitle" Text="Drop something good." FontSize="23" FontWeight="Bold" Foreground="#25352A" TextWrapping="Wrap" />
+              <TextBlock x:Name="SelectionDescription" Text="Images, videos, documents, and all the little things in between." FontSize="13" Foreground="#778174" TextWrapping="Wrap" />
+              <StackPanel Orientation="Horizontal" Spacing="9" Margin="0,7,0,0">
+                <Button Classes="primary" Content="Choose files" Click="ChooseFiles" />
+                <Button Classes="nav" Content="Clear" Click="ClearFiles" />
+              </StackPanel>
+            </StackPanel>
+            <Border Grid.Column="1" Width="150" Height="135" Background="#F4EACB" CornerRadius="24" Margin="24,0,0,0">
+              <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="6">
+                <TextBlock Text="✿" FontSize="42" Foreground="#B48B37" HorizontalAlignment="Center" />
+                <TextBlock Text="LOCAL FILES" FontSize="9" FontWeight="Bold" Foreground="#778174" LetterSpacing="1" />
+              </StackPanel>
+            </Border>
+            <ListBox x:Name="FileList" Grid.Row="1" Grid.ColumnSpan="2" MinHeight="0" MaxHeight="120" Margin="0,16,0,0" Background="#F8F3E8" BorderThickness="0" />
+            <TextBlock x:Name="FormatHeading" Grid.Row="2" Grid.ColumnSpan="2" Text="CONVERT TO" FontSize="10" FontWeight="Bold" Foreground="#778174" LetterSpacing="1" Margin="0,18,0,9" />
+            <WrapPanel x:Name="FormatChoices" Grid.Row="3" Grid.ColumnSpan="2" ItemWidth="92" ItemHeight="42" />
+          </Grid>
+        </Border>
+
+        <Border Classes="card" Padding="18">
+          <Grid ColumnDefinitions="Auto,*,Auto">
+            <Border Width="40" Height="40" CornerRadius="13" Background="#E7EDF5">
+              <TextBlock Text="↓" FontSize="25" Foreground="#58749B" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+            <StackPanel Grid.Column="1" Margin="13,0" VerticalAlignment="Center" Spacing="3">
+              <TextBlock Text="Download a link" FontSize="14" FontWeight="Bold" Foreground="#25352A" />
+              <TextBlock Text="Video, audio, or an image. Straight into your tools." FontSize="12" Foreground="#778174" />
+            </StackPanel>
+            <Button Grid.Column="2" Classes="nav" Content="Coming next" IsEnabled="False" VerticalAlignment="Center" />
+          </Grid>
+        </Border>
+
+        <TextBlock x:Name="Status" Text="Files stay on your computer." FontSize="11" Foreground="#778174" Margin="3,0,0,0" />
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</Window>
