@@ -1,61 +1,119 @@
-<p align="center"><img src="Resources/Brand/NashiIcon.png" width="128" alt="Nashi"></p>
-<h1 align="center">Nashi</h1>
-<p align="center">Your files, a little sweeter. · Dosyaların için tatlı bir kolaylık.</p>
+<p align="center"><img src="docs/assets/brand/molla-icon-512.png" width="112" alt="Molla glass apple icon"></p>
 
-[English guide](https://orkunisitmak.github.io/nashi-app/) · [Türkçe](https://orkunisitmak.github.io/nashi-app/tr/) · [Latest release](https://github.com/orkunisitmak/nashi-app/releases/latest) · [Security](SECURITY.md)
+# Molla
 
-Nashi is an independent, open-source file conversion and editing app inspired by [Tangerine](https://tangerineformac.com/)'s drag-and-wheel interaction. It adds public web-media downloads, QR reading, refined crop/annotation workflows, keyboard media editing, live progress and signed automatic updates. Nashi is not affiliated with Tangerine or LEAP STUDIO and includes no proprietary reference-app binaries or artwork.
+**Drop. Convert. Done.**
 
-Try the [interactive browser playground](https://orkunisitmak.github.io/nashi-app/#playground): drag sample files, use the wheel and shortcuts, and explore all 27 tools. Supported image/PDF/audio exports are real; desktop-only operations are labeled previews.
+A small, apple-shaped Linux desktop converter for images, audio, and video.
+Choose files or drop them onto an output format. Molla converts them locally
+and keeps the originals.
 
-## See Nashi in action
+## Download
 
-[![Nashi real screen recording: Finder drag, conversion wheel, crop and video trim](docs/assets/showcase/nashi-demo.gif?v=50e9219b2083)](https://orkunisitmak.github.io/nashi-app/#demo)
+[Download Molla v0.1.0 Preview for Linux x64](https://github.com/EdinGrazhda/Molla-File-Converter/releases/download/v0.1.0-preview/Molla-linux-x64-v0.1.0-preview.tar.gz)
 
-**[Watch the 95-second screen recording](https://orkunisitmak.github.io/nashi-app/#demo)** · **[Türkçe demo](https://orkunisitmak.github.io/nashi-app/tr/#demo)** · [MP4](https://orkunisitmak.github.io/nashi-app/assets/showcase/nashi-demo.mp4?v=50e9219b2083)
+Extract the archive and run `./launch-molla.sh`. The package includes the .NET
+runtime. FFmpeg and FFprobe are still required for audio and video conversion.
 
-A real macOS 0.7.3 screen recording: drag files in Finder, use the wheel to convert to JPG, crop an image and trim a video with In/Out handles. Pauses and longer previews are shortened; retained actions play at normal speed. English and Turkish captions are available in the video player.
+![Molla brand artwork: four glass apples](docs/assets/social/molla-colors-wide.png)
 
-| macOS · Home | macOS · Crop image |
-| :---: | :---: |
-| [![Nashi Mac Home with file selection and quick actions](docs/assets/showcase/mac-home.png)](docs/assets/showcase/mac-home.png) | [![Nashi Mac crop editor with a square selection and aspect ratio controls](docs/assets/showcase/mac-crop.png)](docs/assets/showcase/mac-crop.png) |
-| **macOS · Video trim** | **Windows · 0.7.5** |
-| [![Nashi video trim editor with In and Out handles and a selected range](docs/assets/showcase/mac-trim.png)](docs/assets/showcase/mac-trim.png) | [![Nashi native Windows 0.7.5 Home in the dark theme](docs/assets/showcase/windows-home-preview.png)](docs/assets/showcase/windows-home-preview.png) |
+*Promotional artwork above. Actual application below.*
 
-Windows screenshot: native UI test capture from the released 0.7.5 code, verified in [PR #1](https://github.com/orkunisitmak/nashi-app/pull/1). Demo files contain Nashi's own artwork; no personal files or account details are shown.
+<p align="center"><img src="docs/assets/screenshots/molla-apple.png" width="320" alt="Actual Molla converter with format buttons surrounding Add files"></p>
 
-## Download and use
+## What it does
 
-- **[macOS ZIP · Apple Silicon, macOS 13+](https://github.com/orkunisitmak/nashi-app/releases/latest/download/Nashi-macOS-arm64.zip):** extract, move Nashi.app to your Applications folder and open it. The full macOS catalog has 27 tools, 46 input formats and 276 conversion routes.
-- **[Windows x64 ZIP](https://github.com/orkunisitmak/nashi-app/releases/latest/download/Nashi-Windows-x64.zip):** extract the entire archive into its own writable folder, then open Nashi.exe. No separate .NET install is required. Keep the folder together so portable updates can replace the app safely. [Windows features and differences](windows/README.md).
+- Convert by dropping files directly onto a format, or choose files first.
+- Collapse into a small desktop apple; click to expand, drag to move, or drop files to select them.
+- Switch between red, green, yellow, and gray glass tints on both apple views.
+- Edit the opening shortcut from the color menu's **Shortcut** tab on configured GNOME/Zorin desktops.
+- Export to **~/Downloads/Molla**, preserving originals and avoiding filename collisions.
+- Cancel conversions without publishing a partial batch.
 
-First launch guides you through **Finish setup → Download missing tools** for hash-verified downloads directly from upstream. Media and Office tools install in sequence; existing tools are kept, and cancelled or failed setup can be retried. **Tools ready** appears only when both groups are available. Core native image/PDF features work immediately. [Exact versions, hashes and licenses](docs/dependencies.md).
+| Output category | Formats |
+| --- | --- |
+| Images | PNG, JPG, WebP, AVIF, TIFF, BMP |
+| Audio | MP3, WAV, FLAC, M4A, OGG, Opus |
+| Video | MP4, MOV, MKV, WebM, AVI, WMV |
 
-These first public builds do not have Apple notarization or Windows Authenticode publisher signing. Your OS may require first-launch approval; consult [Apple's guidance](https://support.apple.com/en-us/102445). Nashi does not disable system security settings. Official release assets include SHA-256 checksums. A CI artifact alone is not an official signed update.
+Audio/video need FFmpeg and FFprobe on PATH. Codec availability depends on your
+FFmpeg build. Image exports use a single-frame decoder and remove metadata.
+An output format being listed does not mean every possible input is supported.
 
-## Shortcuts
+## Build and run
 
-On macOS, hold **Shift** while dragging in Finder for conversion, **Command** for tools or **Control** for file actions. **Control–Shift–D** downloads a copied public link. Drag modifiers are customizable. On Windows, use **Ctrl+O** to choose files, **Ctrl+V** to import copied files/text/images, and **Ctrl+Space** for the tools and conversion wheel. **Ctrl+2** opens Library; **Ctrl+F** searches it. Normal paste inside text fields is preserved. Home and Library share the Mac color palette, rounded cards and gold actions, with System/Light/Dark appearance.
+Requirements: Linux graphical session, .NET 10 SDK, Avalonia's Linux native
+dependencies, and optional FFmpeg/FFprobe for media conversions.
 
-Supported media editors use **Space** for play/pause, **Left/Right** to seek one second and **I/O** to mark a range. Crop uses drag, **Shift** for aspect lock and **Enter** to save. The [English](https://orkunisitmak.github.io/nashi-app/#shortcuts) and [Turkish](https://orkunisitmak.github.io/nashi-app/tr/#shortcuts) pages contain the complete macOS shortcut sheet; the [Windows guide](windows/README.md) lists its available controls.
-
-## Build
-
-For macOS: Apple Silicon, macOS 13+ and Xcode/Swift 6.
+From this repository's root:
 
 ```sh
-scripts/setup-exiftool.sh
-swift build --product Nashi
-swift test --filter NashiUpdatesTests
-scripts/build-app.sh release
+dotnet restore src/Molla.Linux/Molla.Linux.csproj
+dotnet build src/Molla.Linux/Molla.Linux.csproj -c Release --no-restore
+./run-molla.sh
 ```
 
-The public app is written to `build/Nashi.app`. Large runtimes are installed through its setup screen. Source builds use an ad-hoc signature unless you provide your own ignored signing profile. Signing private keys are never distributed. [Windows build instructions](windows/README.md).
+The launcher uses the `dotnet` command on PATH and opens the apple converter.
+SDKs and package caches are not part of the source distribution.
 
-## Privacy and updates
+## Everyday controls
 
-Conversion/editing run locally. Web downloads contact the selected media site. No analytics, cloud account or browser-cookie import is built in. Official releases update through this public repository without a GitHub account or token. macOS verifies the signed feed and archive; Windows verifies the archive signature and version before replacement. Active operations finish or cancel before the app exits for an update. Portable Windows updates retain the previous folder as a recoverable backup.
+| Action | Control |
+| --- | --- |
+| Select files | **Add files**, or drop onto the center |
+| Convert immediately | Drop files onto a format |
+| Move expanded apple | Drag the **molla** title |
+| Collapse / expand | **−**, then click the mini apple |
+| Move mini apple | Drag its body |
+| Colors / shortcut | Droplet icon, then the relevant tab |
+| Close | **×**, or your desktop's close-window shortcut |
+| Find exports | **Open exports** |
 
-## License and acknowledgments
+The development machine uses **Ctrl + Alt + M** to open and **Alt + F4** to
+close the focused window. These are desktop settings, not portable built-in
+global hotkeys. See [setup](docs/SETUP.md) for a new installation.
 
-Nashi's original source is [MIT](LICENSE). Vendored libraries and external tools retain their own licenses; see [macOS notices](Resources/THIRD-PARTY-NOTICES.txt), [Windows notices](windows/THIRD-PARTY-NOTICES.txt) and [runtime setup](docs/dependencies.md). No purchase flow or reference-app account is required.
+## Glass appearance and current limits
+
+Molla requests native blur where the compositor supports it. On the tested
+Zorin/GNOME desktop, the compositor reports transparency only, so the app uses
+translucent tinted glass without true background blur.
+
+Color and file selection are session state; opening-shortcut changes are stored
+in GNOME settings. There is no installer, automatic updater, persistent library,
+web downloader, or document-editing workflow in the apple converter.
+Multiple launches may create multiple windows.
+
+## Development and verification
+
+```sh
+dotnet build src/Molla.Verify/Molla.Verify.csproj -c Release
+dotnet src/Molla.Verify/bin/Release/net10.0/Molla.Verify.dll
+```
+
+The optional graphical test is described in [CONTRIBUTING.md](CONTRIBUTING.md).
+It requires a configured GNOME shortcut and writes that same binding back during
+its save test. It also tests colors, button hit areas, collapse/expand, and a
+real conversion through the file-drop handler.
+
+## Project map
+
+- `src/Molla.Linux/` — Avalonia UI, shortcut editor, conversion adapter.
+- `src/Molla.Core/` — the conversion code used by the Molla app.
+- `src/Molla.Verify/` — conversion and graphical checks.
+- `docs/` — setup, screenshots, icon, and social designs.
+- `molla-video/` — editable Remotion product animation.
+
+## Credits and publication
+
+Molla includes conversion code derived from
+[Nashi by Orkun Işıtmak and contributors](https://github.com/orkunisitmak/nashi-app).
+Its MIT notice is preserved in [UPSTREAM-LICENSE.txt](UPSTREAM-LICENSE.txt).
+Bundled DejaVu fonts retain their [license](src/Molla.Linux/Assets/Fonts/LICENSE).
+
+## Press and social
+
+[Social graphics, captions, and usage notes](docs/SOCIAL.md) ·
+[Editable icon](docs/assets/brand/molla-icon.svg) ·
+[Setup](docs/SETUP.md) ·
+[Contribution guide](CONTRIBUTING.md)

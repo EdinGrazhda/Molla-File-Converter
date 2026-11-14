@@ -1,28 +1,41 @@
-# Contributing
+# Contributing to Molla
 
-Please open an issue describing the problem, platform, app version and expected
-behavior before proposing a large change. Small fixes can go directly to a PR.
-Use synthetic, redistributable fixtures; never attach private documents or keys.
+The active converter lives in `src/Molla.Linux`.
+The repository contains the Avalonia converter and its focused verification project.
 
-macOS: Xcode with Swift 6, macOS 13+, Apple Silicon. Run `swift test`.
-Windows source and build instructions live under `windows/`.
+## Build and check
 
-For native UI changes, use the [isolated UI audit](docs/testing/UI-AUDIT.md) to
-check light/dark and English/Turkish scenes without dragging personal files.
-It complements the native gesture, keyboard and export tests; it does not replace them.
+From the outer repository root, with the .NET 10 SDK installed:
 
-New output formats and tools must preserve originals, choose unique output names,
-clean partial exports on cancellation, and avoid shell interpolation. Test these
-boundaries and actual output metadata rather than only checking file existence.
+```sh
+dotnet build src/Molla.Verify/Molla.Verify.csproj -c Release
+dotnet src/Molla.Verify/bin/Release/net10.0/Molla.Verify.dll
+```
 
-Nashi is independently developed and inspired by Tangerine's drag-and-wheel
-interaction. Do not contribute proprietary Tangerine code, binaries, artwork,
-screenshots or decompiled resources. Third-party licenses must be preserved.
+For the UI smoke test, use a graphical GNOME session with the Molla opening
+shortcut registered as described in [setup](docs/SETUP.md):
 
-## Owner pull requests
+```sh
+FONTCONFIG_FILE="$PWD/src/Molla.Linux/fonts.conf" \
+  dotnet src/Molla.Verify/bin/Release/net10.0/Molla.Verify.dll --ui
+```
 
-Ready PRs authored by `orkunisitmak` from branches in this repository merge automatically
-once the required GitHub Actions security, Mac and Windows checks pass. Drafts,
-external forks and other authors remain manual. Keep a PR in draft while it is not
-ready to merge. A new commit must pass the checks again. Automatic merges also
-request post-merge CI and the existing GitHub Pages site build.
+The UI test briefly opens windows, generates previews in `/tmp`, saves the
+current shortcut unchanged, checks that Alt+F4 is rejected as a conflict, and
+converts a generated image through the drop handler. It cleans its own test
+input/output files. It does not validate a physical keyboard shortcut press or
+a physical file-manager drag; check those manually.
+
+## Changes
+
+- Preserve the apple silhouette, both views, and readable contrast across all tints.
+- Keep transparent hit areas large without enlarging visible chrome beyond the apple.
+- Never overwrite input files or existing exports.
+- Keep conversions local and cancellation safe.
+- Keep conversion-core changes narrow and covered by verification.
+- Include before/after screenshots for visible UI changes.
+- Treat GNOME global shortcuts and compositor blur as platform-dependent capabilities.
+
+Report failures with Linux distribution, desktop/compositor, .NET version,
+input and target format, steps to reproduce, and the error message.
+Use a generated or non-sensitive sample when sharing files.
