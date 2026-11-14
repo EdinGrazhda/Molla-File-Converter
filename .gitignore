@@ -1,27 +1,6 @@
-.build/
-build/
-Tools/
-Downloads/
-.swiftpm/
-.DS_Store
-local/
-Configuration/Signing.plist
-Configuration/CredentialBroker.json
-.env
-.env.*
-!.env.example
-*.key
-*.p12
-*.pfx
-*.mobileprovision
+# Local tools, caches, and build products
 **/bin/
 **/obj/
-/.dotnet/
-/.dotnet-home/
-/.dotnet-tmp/
-/.nuget/
-/.runtime/
-# Local tools, caches, and build products
 **/.dotnet/
 **/.dotnet-home/
 **/.dotnet-tmp/
@@ -34,10 +13,17 @@ Configuration/CredentialBroker.json
 *.pyc
 .venv/
 **/node_modules/
+.DS_Store
 .agents/
 .codex/
 # Private working material, not the public app
 rea-analysis/
+.env
+.env.*
+!.env.example
+*.key
+*.p12
+*.pfx
 *.log
 **/Configuration/Signing.plist
 **/Configuration/CredentialBroker.json
